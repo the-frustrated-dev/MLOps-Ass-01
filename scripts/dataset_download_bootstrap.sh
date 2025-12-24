@@ -52,6 +52,7 @@ cd "$REPO_ROOT"
 if [ ! -d ".dvc" ]; then
     echo "Initializing DVC in $REPO_ROOT..."
     dvc init
+    git commit -s -m "Initialized DVC" # make this commit so that we don't accidentally push credentials
     
     REMOTE_URL="https://dagshub.com/${DAGSHUB_USER_NAME}/${REPO_NAME}.dvc"
     dvc remote add -d "$REMOTE_NAME" "$REMOTE_URL"
