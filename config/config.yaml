@@ -1,5 +1,5 @@
 project:
-  repo_name: "test"
+  repo_name: "MLOps-Ass-01"
   remote_name: "origin"
 data:
   url: "https://archive.ics.uci.edu/static/public/45/heart+disease.zip"
