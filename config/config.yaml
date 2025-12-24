@@ -1,0 +1,8 @@
+project:
+  repo_name: "test"
+  remote_name: "origin"
+data:
+  url: "https://archive.ics.uci.edu/static/public/45/heart+disease.zip"
+  dataset_name: "heart_disease.zip"
+  target_dir: "data/"
+
