@@ -44,17 +44,17 @@ jobs:
         run: |
           dvc pull data/heart_disease.zip.dvc -r origin
 
-      - name: Install Test Dependencies
-        run: uv sync --group test
-
-      - name: Sanity Test
-        run: uv run pytest tests/
-
       - name: Install Dependencies
         run: uv sync
 
       - name: Preprocess
         run: dvc repro
+
+      - name: Install Test Dependencies
+        run: uv sync --group test
+
+      - name: Sanity Test
+        run: uv run pytest tests/
 
       - name: Report Metrics
         run: |
