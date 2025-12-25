@@ -2,9 +2,41 @@ stages:
   preprocess:
     cmd: uv run python src/preprocess.py
     deps:
-    - data/heart_disease.zip
-    - src/preprocess.py
+      - data/heart_disease.zip
+      - src/preprocess.py
     outs:
-    - data/raw
-    - data/processed
+      - data/processed/cleaned_heart_disease.csv
 
+  features:
+    cmd: uv run python src/features.py
+    deps:
+      - data/processed/cleaned_heart_disease.csv
+      - src/features.py
+    outs:
+      - data/features/train_test_data.pkl
+
+  train:
+    cmd: uv run python src/train.py
+    deps:
+      - data/features/train_test_data.pkl
+      - src/train.py
+    params:
+      - config/params.yaml: # Specify the path to the file
+          - model_choice
+          - hyperparams
+    outs:
+      - models/model.joblib
+
+  evaluate:
+    cmd: uv run python src/evaluate.py
+    deps:
+      - models/model.joblib
+      - data/features/train_test_data.pkl
+      - src/evaluate.py
+    metrics:
+      - metrics.json:
+          cache: false
+    plots:
+      - confusion_matrix.csv:
+          x: actual
+          y: predicted

@@ -11,6 +11,13 @@ jobs:
   pull-data:
     runs-on: ubuntu-latest
 
+    env:
+      # MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
+      # MLFLOW_TRACKING_USERNAME: ${{ secrets.DAGSHUB_USER_NAME }}
+      # MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_TOKEN }}
+      DAGSHUB_USER_NAME: ${{ secrets.DAGSHUB_USER_NAME }}
+      DAGSHUB_TOKEN: ${{ secrets.DAGSHUB_TOKEN }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -37,13 +44,20 @@ jobs:
         run: |
           dvc pull data/heart_disease.zip.dvc -r origin
 
-      - name: Verify Data
-        run: |
-          ls -R data/
-          echo "Dataset successfully pulled!"
+      - name: Install Test Dependencies
+        run: uv sync --group test
+
+      - name: Sanity Test
+        run: uv run pytest tests/
 
       - name: Install Dependencies
         run: uv sync
 
       - name: Preprocess
-        run: dvc repro preprocess -f # force run preprocess steps
+        run: dvc repro
+
+      - name: Report Metrics
+        run: |
+          echo "## Model Performance Summary" >> $GITHUB_STEP_SUMMARY
+          echo "### Metrics" >> $GITHUB_STEP_SUMMARY
+          cat metrics.json | jq -r 'to_entries | .[] | "- **\(.key)**: \(.value)"' >> $GITHUB_STEP_SUMMARY

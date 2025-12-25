@@ -1,7 +1,7 @@
 schema: '2.0'
 stages:
   preprocess:
-    cmd: python src/preprocess.py
+    cmd: uv run python src/preprocess.py
     deps:
     - path: data/heart_disease.zip
       hash: md5
@@ -9,16 +9,77 @@ stages:
       size: 128894
     - path: src/preprocess.py
       hash: md5
-      md5: 9671166ae1524ad9c545ae9cdef099f3
-      size: 1153
+      md5: e7bebb5ca0f1d41c00b1b8de2adfb595
+      size: 1204
     outs:
-    - path: data/processed
+    - path: data/processed/cleaned_heart_disease.csv
       hash: md5
-      md5: 65b29f7428cd384a5b2518cd49a937ce.dir
+      md5: 4a9ccf8b95081f5db8a6f0a71091bfac
       size: 18187
-      nfiles: 1
-    - path: data/raw
+  features:
+    cmd: uv run python src/features.py
+    deps:
+    - path: data/processed/cleaned_heart_disease.csv
       hash: md5
-      md5: 0726710849aafb40b523bc2ec30e40a4.dir
-      size: 673802
-      nfiles: 22
+      md5: 4a9ccf8b95081f5db8a6f0a71091bfac
+      size: 18187
+    - path: src/features.py
+      hash: md5
+      md5: 28085731008dfb62ffed44b409ac4693
+      size: 818
+    outs:
+    - path: data/features/train_test_data.pkl
+      hash: md5
+      md5: bee3e13575134a82e0754c0c2f3e703f
+      size: 42752
+  train:
+    cmd: uv run python src/train.py
+    deps:
+    - path: data/features/train_test_data.pkl
+      hash: md5
+      md5: bee3e13575134a82e0754c0c2f3e703f
+      size: 42752
+    - path: src/train.py
+      hash: md5
+      md5: c80a36657d490e3e98779c3b701f8f3f
+      size: 1021
+    params:
+      config/params.yaml:
+        hyperparams:
+          rf:
+            n_estimators: 100
+            max_depth: 10
+            random_state: 42
+          lr:
+            max_iter: 1000
+            solver: lbfgs
+        model_choice: random_forest
+    outs:
+    - path: models/model.joblib
+      hash: md5
+      md5: 7595c5e4b0318b1d5d56ea135c62a2cc
+      size: 724377
+  evaluate:
+    cmd: uv run python src/evaluate.py
+    deps:
+    - path: data/features/train_test_data.pkl
+      hash: md5
+      md5: bee3e13575134a82e0754c0c2f3e703f
+      size: 42752
+    - path: models/model.joblib
+      hash: md5
+      md5: 7595c5e4b0318b1d5d56ea135c62a2cc
+      size: 724377
+    - path: src/evaluate.py
+      hash: md5
+      md5: da4f2fba69b7d94fabf59ce906e68804
+      size: 1048
+    outs:
+    - path: confusion_matrix.csv
+      hash: md5
+      md5: d30cd2c276a6b95ad638cca62a60698b
+      size: 257
+    - path: metrics.json
+      hash: md5
+      md5: 8a988342ce5d9ac805b7a3ddc5e6e485
+      size: 73

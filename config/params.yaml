@@ -1,0 +1,9 @@
+model_choice: "random_forest"
+hyperparams:
+  rf:
+    n_estimators: 100
+    max_depth: 10
+    random_state: 42
+  lr:
+    max_iter: 1000
+    solver: "lbfgs"

@@ -23,7 +23,9 @@ def preprocess():
     
     # Basic preprocessing - these will change after EDA
     df = df.replace('?', pd.NA).dropna()
-    # df['target'] = (df['target'] > 0).astype(int)
+
+    # make it binary class for now
+    df['target'] = df['target'].apply(lambda x: 1 if x > 0 else 0)
     
     processed_dir = "data/processed"
     os.makedirs(processed_dir, exist_ok=True)
