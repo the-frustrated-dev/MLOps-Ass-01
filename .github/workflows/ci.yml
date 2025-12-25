@@ -23,7 +23,7 @@ jobs:
       - name: Set up Python
         run: uv python install
 
-      - name: Install Dependencies
+      - name: Install DVC
         run: uv tool install dvc
 
       - name: Configure DVC Secrets
@@ -41,6 +41,9 @@ jobs:
         run: |
           ls -R data/
           echo "Dataset successfully pulled!"
+
+      - name: Install Dependencies
+        run: uv sync
 
       - name: Preprocess
         run: dvc repro preprocess -f # force run preprocess steps
