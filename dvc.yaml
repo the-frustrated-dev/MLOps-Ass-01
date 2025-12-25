@@ -38,5 +38,6 @@ stages:
           cache: false
     plots:
       - confusion_matrix.csv:
+          cache: false
           x: actual
           y: predicted

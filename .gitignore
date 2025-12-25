@@ -217,4 +217,3 @@ data/processed/
 data/features/
 models/
 heart_disease.zip
-/confusion_matrix.csv
