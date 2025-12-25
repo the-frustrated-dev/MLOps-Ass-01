@@ -1,0 +1,10 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - data/heart_disease.zip
+    - src/preprocess.py
+    outs:
+    - data/raw
+    - data/processed
+

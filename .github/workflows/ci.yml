@@ -41,3 +41,6 @@ jobs:
         run: |
           ls -R data/
           echo "Dataset successfully pulled!"
+
+      - name: Preprocess
+        run: dvc repro preprocess -f # force run preprocess steps

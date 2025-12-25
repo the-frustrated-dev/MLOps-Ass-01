@@ -1,0 +1,24 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - path: data/heart_disease.zip
+      hash: md5
+      md5: bdd604952d75006f1f2af59aaa8b5925
+      size: 128894
+    - path: src/preprocess.py
+      hash: md5
+      md5: 9671166ae1524ad9c545ae9cdef099f3
+      size: 1153
+    outs:
+    - path: data/processed
+      hash: md5
+      md5: 65b29f7428cd384a5b2518cd49a937ce.dir
+      size: 18187
+      nfiles: 1
+    - path: data/raw
+      hash: md5
+      md5: 0726710849aafb40b523bc2ec30e40a4.dir
+      size: 673802
+      nfiles: 22
