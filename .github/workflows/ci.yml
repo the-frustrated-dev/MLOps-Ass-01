@@ -35,7 +35,7 @@ jobs:
 
       - name: Pull Data from DVC
         run: |
-          dvc pull -r origin
+          dvc pull data/heart_disease.zip.dvc -r origin
 
       - name: Verify Data
         run: |
