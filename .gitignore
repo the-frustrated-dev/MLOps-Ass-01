@@ -205,7 +205,6 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
-/confusion_matrix.csv
 
 
 .venv/
@@ -218,3 +217,4 @@ data/processed/
 data/features/
 models/
 heart_disease.zip
+/confusion_matrix.csv
