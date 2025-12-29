@@ -215,5 +215,4 @@ mlflow.db
 data/raw/
 data/processed/
 data/features/
-models/
 heart_disease.zip
