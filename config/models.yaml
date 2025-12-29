@@ -1,0 +1,8 @@
+models:
+  logistic_regression:
+    class: sklearn.linear_model.LogisticRegression
+    fixed_params:
+      max_iter: 200
+
+  random_forest:
+    class: sklearn.ensemble.RandomForestClassifier

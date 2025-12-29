@@ -12,12 +12,15 @@ dependencies = [
     "pandas>=2.3.3",
     "pyyaml>=6.0.3",
     "scikit-learn>=1.8.0",
+    "xgboost>=3.1.2",
 ]
 
 [dependency-groups]
 notebook = [
     "dvc>=3.65.0",
     "jupyter>=1.1.1",
+    "matplotlib>=3.10.8",
+    "seaborn>=0.13.2",
 ]
 test = [
     "pytest>=9.0.2",

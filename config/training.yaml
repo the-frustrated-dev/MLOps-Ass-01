@@ -1,0 +1,9 @@
+data:
+  path: "data/raw/processed.cleveland.data"
+  cols: ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach', 'exang', 'oldpeak', 'slope', 'ca', 'thal', 'nums']
+  target_col: "nums"
+  test_size: 0.2
+  random_state: 42
+
+metric: f1_weighted
+experiment_name: heart-disease-multiclass
