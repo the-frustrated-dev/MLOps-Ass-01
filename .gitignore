@@ -216,3 +216,9 @@ data/raw/
 data/processed/
 data/features/
 heart_disease.zip
+
+# Ignore all models directories everywhere
+models/
+
+# But do not ignore the one inside src
+!src/models/
