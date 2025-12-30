@@ -1,4 +1,12 @@
+import os
 import mlflow
+
+if os.getenv("CI", "false").lower() == "false":
+    from dotenv import load_dotenv
+    load_dotenv()
+
+if os.getenv("MLFLOW_TRACKING_URI"):
+    mlflow.set_tracking_uri(os.getenv("MLFLOW_TRACKING_URI"))
 
 def start_run(cfg, run_name, params):
     mlflow.set_experiment(cfg["experiment_name"])
