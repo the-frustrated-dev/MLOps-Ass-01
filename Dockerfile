@@ -17,6 +17,11 @@ RUN --mount=type=secret,id=dagshub_username \
 ## FINAL STAGE (Reduces Size) ##
 FROM registry.access.redhat.com/ubi9/python-312
 
-COPY --from=base /tmp/models/artifacts models
+# bind mount anc copy only pkl file
+# COPY --from=base /tmp/models/artifacts models
+
 # don't bloat final layer with mlflow/pyarrow/etc etc. simple scikit learn model only needs scikit learn to be installed
-RUN pip install scikit-learn
+RUN --mount=type=bind,from=base,src=/tmp/models/artifacts/,target=/tmp/artifacts/,rw,
+    pip install --no-cache-dir scikit-learn && \
+    mkdir models && \
+    cp /tmp/artifacts/model.pkl models/
