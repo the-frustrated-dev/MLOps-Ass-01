@@ -12,7 +12,7 @@ RUN --mount=type=secret,id=dagshub_username \
     python -c "import mlflow; from mlflow import MlflowClient; client = MlflowClient(); mlflow.artifacts.download_artifacts(artifact_uri=client.get_model_version_by_alias(name='demo_model', alias='Champion').source, dst_path='/tmp/models')"
 
 ## FINAL STAGE (Reduces Size) ##
-FROM FROM registry.access.redhat.com/ubi9/python-312
+FROM registry.access.redhat.com/ubi9/python-312
 
 COPY --from=base /tmp/models/artifacts models
 # don't bloat final layer with mlflow/pyarrow/etc etc. simple scikit learn model only needs scikit learn to be installed
