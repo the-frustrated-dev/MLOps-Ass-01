@@ -6,8 +6,9 @@ from sklearn.preprocessing import StandardScaler
 #     X_test = scaler.transform(X_test)
 #     return X_train, X_test
 
-def preprocess(X_train, X_test):
-    scaler = StandardScaler()
-    X_train = scaler.fit_transform(X_train)
-    X_test = scaler.transform(X_test)
-    return X_train, X_test
+def preprocess():
+    # scaler = StandardScaler()
+    # X_train = scaler.fit_transform(X_train)
+    # X_test = scaler.transform(X_test)
+    # return X_train, X_test
+    return [("scaler", StandardScaler())]

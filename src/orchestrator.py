@@ -5,6 +5,7 @@ from collections import defaultdict
 import yaml
 import mlflow
 import pandas as pd
+from sklearn.pipeline import Pipeline
 
 from data.data_utils import fetch_data, load_data
 from features.preprocess import preprocess
@@ -33,7 +34,8 @@ fetch_data(data_cfg) # downloading handled
 X_train, X_test, y_train, y_test = load_data(data_cfg)
 
 ## 4. Preprocess the data ##
-X_train, X_test = preprocess(X_train, X_test)
+# Add preprocessing to model pipeline so that preprocessors are serialized along with the model
+# X_train, X_test = preprocess(X_train, X_test)
 
 ## 5. Train & Evaluate Models ##
 track_best_models = defaultdict(list)
@@ -41,7 +43,10 @@ for experiment_name, model_info in models_cfg["experiments"].items():
     experiment = mlflow.set_experiment(experiment_name)
 
     with mlflow.start_run(experiment_id=experiment.experiment_id) as run:
-        model = create_model(model_info["class"], params=model_info.get("params"))
+        model = Pipeline([
+            *preprocess(), # this will allow all preprocessors to be serialized alongwith the model
+            ("classifier", create_model(model_info["class"], params=model_info.get("params")))]
+        )
         
         train_model(model, X_train, y_train.to_numpy()) 
         
