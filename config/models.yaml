@@ -10,12 +10,12 @@
 
 
 experiments:
-    # logistic_regression_exp6:
-    #     class: sklearn.linear_model.LogisticRegression
-    #     params:
-    #         max_iter: 1200
-    #         class_weight: balanced
-    #         solver: lbfgs
+    logistic_regression_exp6:
+        class: sklearn.linear_model.LogisticRegression
+        params:
+            max_iter: 1200
+            class_weight: balanced
+            solver: lbfgs
     # random_forest_exp6:
     #     class: sklearn.ensemble.RandomForestClassifier
     #     params:
