@@ -2,6 +2,9 @@ FROM registry.access.redhat.com/ubi9/python-312 AS base
 
 RUN pip install --no-cache-dir mlflow
 
+# to access run secrets
+USER 0
+
 RUN --mount=type=secret,id=dagshub_username \
     --mount=type=secret,id=dagshub_token \
     --mount=type=secret,id=mlflow_uri \
