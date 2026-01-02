@@ -1,4 +1,4 @@
-name: DVC Data Pull
+name: DEmo
 
 on:
   # push:
