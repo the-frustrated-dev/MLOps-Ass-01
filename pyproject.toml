@@ -3,25 +3,38 @@ name = "mlops-ass-01"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.12,<3.14"
+#dependencies = [
+#    "dvc>=3.65.0",
+#    "joblib>=1.5.3",
+#    "mlflow<3",
+#    "numpy>=2.4.0",
+#    "pandas>=2.3.3",
+#    "pip>=25.3",
+#    "pyyaml>=6.0.3",
+#    "scikit-learn>=1.8.0",
+#    "seaborn>=0.13.2",
+#    "xgboost>=3.1.2",
+#]
 dependencies = [
-    "dvc>=3.65.0",
-    "joblib>=1.5.3",
-    "mlflow>=3.8.0",
+    "dotenv>=0.9.9",
+    "matplotlib>=3.10.8",
+    "mlflow>=3.8.1",
     "numpy>=2.4.0",
     "pandas>=2.3.3",
+    "pip>=25.3",
     "pyyaml>=6.0.3",
     "scikit-learn>=1.8.0",
-    "xgboost>=3.1.2",
+    "seaborn>=0.13.2",
 ]
 
 [dependency-groups]
-notebook = [
-    "dvc>=3.65.0",
-    "jupyter>=1.1.1",
-    "matplotlib>=3.10.8",
-    "seaborn>=0.13.2",
-]
+#notebook = [
+#    "dvc>=3.65.0",
+#    "jupyter>=1.1.1",
+#    "matplotlib>=3.10.8",
+#    "seaborn>=0.13.2",
+#]
 test = [
     "pytest>=9.0.2",
 ]

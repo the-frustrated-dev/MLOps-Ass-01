@@ -44,10 +44,10 @@ F1-Score:  {f1_score(y_test, y_pred, average="weighted"):.4f}
     # plt.savefig() # TODO
     # plt.show()
     results = {
-        'Accuracy':  accuracy_score(y_test, y_pred),
-        'Precision': precision_score(y_test, y_pred, average="weighted", zero_division=0),
-        'Recall':    recall_score(y_test, y_pred, average="weighted"),
-        'F1-Score':  f1_score(y_test, y_pred, average="weighted"),
+        'accuracy':  accuracy_score(y_test, y_pred),
+        'precision': precision_score(y_test, y_pred, average="weighted", zero_division=0),
+        'recall':    recall_score(y_test, y_pred, average="weighted"),
+        'f1_weighted':  f1_score(y_test, y_pred, average="weighted"),
     }
     if hasattr(model, "predict_proba"):
         results["ROC-AUC"] = roc_auc_score(y_test, model.predict_proba(X_test), multi_class="ovr")

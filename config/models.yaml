@@ -1,8 +1,25 @@
-models:
-  logistic_regression:
-    class: sklearn.linear_model.LogisticRegression
-    fixed_params:
-      max_iter: 200
+# models:
+#   logistic_regression:
+#     class: sklearn.linear_model.LogisticRegression
+#     fixed_params:
+#       max_iter: 200
+#       class_weight: balanced
 
-  random_forest:
-    class: sklearn.ensemble.RandomForestClassifier
+#   random_forest:
+#     class: sklearn.ensemble.RandomForestClassifier
+
+
+experiments:
+    # logistic_regression_exp6:
+    #     class: sklearn.linear_model.LogisticRegression
+    #     params:
+    #         max_iter: 1200
+    #         class_weight: balanced
+    #         solver: lbfgs
+    # random_forest_exp6:
+    #     class: sklearn.ensemble.RandomForestClassifier
+    #     params:
+    #         n_estimators: 256
+    #         max_depth: 80
+    naive_bayes_gaussian_exp6:
+        class: sklearn.naive_bayes.GaussianNB
